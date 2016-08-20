@@ -108,7 +108,7 @@ resources:
                 Effect: Allow
                 Action:
                   - '*'
-                Resource: 'arn:aws:dynamodb:${region}:*:table/${service}-authors-${stage}'
+                Resource: 'arn:aws:dynamodb:${region}:*:table/${service}-jokeauthors-${stage}'
           Roles:
             -
               Ref: IamRoleLambda
