@@ -103,21 +103,16 @@ resources:
                 Effect: Allow
                 Action:
                   - '*'
-                Resource: 'arn:aws:dynamodb:${region}:*:table/${service}-posts-${stage}'
+                Resource: 'arn:aws:dynamodb:${region}:*:table/${service}-jokes-${stage}'
               -
                 Effect: Allow
                 Action:
                   - '*'
                 Resource: 'arn:aws:dynamodb:${region}:*:table/${service}-authors-${stage}'
-              -
-                Effect: Allow
-                Action:
-                  - '*'
-                Resource: 'arn:aws:dynamodb:${region}:*:table/${service}-comments-${stage}'
           Roles:
             -
               Ref: IamRoleLambda
-      PostsDynamo:
+      JokesDynamo:
         Type: 'AWS::DynamoDB::Table'
         DeletionPolicy: Retain
         Properties:
@@ -132,8 +127,8 @@ resources:
           ProvisionedThroughput:
             ReadCapacityUnits: 1
             WriteCapacityUnits: 1
-          TableName: '${service}-posts-${stage}'
-      AuthorsDynamo:
+          TableName: '${service}-jokes-${stage}'
+      JokeAuthorsDynamo:
         Type: 'AWS::DynamoDB::Table'
         DeletionPolicy: Retain
         Properties:
@@ -148,23 +143,7 @@ resources:
           ProvisionedThroughput:
             ReadCapacityUnits: 1
             WriteCapacityUnits: 1
-          TableName: '${service}-authors-${stage}'
-      CommentsDynamo:
-        Type: 'AWS::DynamoDB::Table'
-        DeletionPolicy: Retain
-        Properties:
-          AttributeDefinitions:
-            -
-              AttributeName: id
-              AttributeType: S
-          KeySchema:
-            -
-              AttributeName: id
-              KeyType: HASH
-          ProvisionedThroughput:
-            ReadCapacityUnits: 1
-            WriteCapacityUnits: 1
-          TableName: '${service}-comments-${stage}'
+          TableName: '${service}-jokeauthors-${stage}'
     Outputs:
       IamRoleArnLambda:
         Description: 'ARN of the lambda IAM role'
