@@ -12,8 +12,9 @@
 # Happy Coding!
 
 service: serverless-graphql-service
-provider: aws
-runtime: nodejs4.3
+provider:
+  name: aws
+  runtime: nodejs4.3
 
 # you can overwrite defaults here
 defaults:
@@ -41,6 +42,7 @@ functions:
             - http:
                 path: graphql
                 method: post
+                cors: true
                 authorizationType: none
                 authorizerFunction: false
                 apiKeyRequired: false
