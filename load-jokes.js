@@ -44,7 +44,7 @@ var allAuthors = [
   {
     id: "2",
     name: "B. Smith"
-  }
+  },
   {
     id: "3",
     name: "C. Williams"
@@ -67,6 +67,24 @@ allJokes.forEach(function(joke) {
            console.error("Unable to add:", joke.id, ". Error JSON:", JSON.stringify(err, null, 2));
        } else {
            console.log("PutItem succeeded:", joke.id);
+       }
+    });
+});
+
+allAuthors.forEach(function(author) {
+    var params = {
+        TableName: "serverless-graphql-service-jokeauthors-dev",
+        Item: {
+            "id":  author.id,
+            "name": author.name
+        }
+    };
+
+    docClient.put(params, function(err, data) {
+       if (err) {
+           console.error("Unable to add:", author.id, ". Error JSON:", JSON.stringify(err, null, 2));
+       } else {
+           console.log("PutItem succeeded:", author.id);
        }
     });
 });
